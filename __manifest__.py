@@ -11,6 +11,9 @@
     "website": "https://github.com/OCA/pos",
     "maintainers": ["ivantodorovich"],
     "depends": ["point_of_sale"],
-    "data": ["views/assets.xml"],
+    "data": ["views/assets.xml",
+             "views/css.xml",
+             "views/inherite_point_of_sale.xml",
+    ],
     "qweb": ["static/src/xml/*.xml"],
 }
