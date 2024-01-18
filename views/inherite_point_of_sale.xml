@@ -2,31 +2,60 @@
 <odoo>
 
     <record id="product_product_action" model="ir.actions.act_window">
-        <field name="name">Product Variants</field>
+        <field name="name">Rooms</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">product.product</field>
-        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="view_mode">kanban,form,activity</field>
         <field name="context" eval=""/>
-        <!-- <field name="context" eval="{'search_default_filter_to_availabe_pos': 1, 'default_available_in_pos': True}"/> -->
-        <field name="domain" eval="[('pos_categ_id','=','Room')]"/>
-        <field name="search_view_id" eval="False"/> <!-- Force empty -->
+        
+
+        <!-- <field name="context" eval="{'default_pos_categ_id': 9 , 'default_available_in_pos': True }"/> -->
+        <field name="context" eval="{'search_default_filter_rooms': 1,'default_pos_categ_id': 9 , 'default_available_in_pos': True}"/>
+        <field name="domain" eval="[]"/>
+        <!-- <field name="domain" eval="[('pos_categ_id','=','Room')]"/> -->
+        <field name="search_view_id" eval="False"/>
+        <!-- Force empty -->
         <field name="view_id" ref="product.product_product_tree_view"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create a new product variant
-            </p><p>
+            </p>
+            <p>
                 You must define a product for everything you sell through
                 the point of sale interface.
             </p>
         </field>
     </record>
 
-    <!-- Add Inherite Product Catalog sub menus -->
+    <!-- Inherite product Template add Hotel Type  -->
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="name">product.template.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='pos_categ_id']" position="after">
+                <field name="type_hotel"/>
+            </xpath>
 
-    <menuitem id="pos_config_menu_action_product_product"
-        name="Room"
-        parent="point_of_sale.pos_config_menu_catalog"
-        action="product_product_action"
-        sequence="30"/>
+        </field>
+    </record>
+
+    <record id="product_template_view_search" model="ir.ui.view">
+        <field name="name">product.template.search.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='type']" position="after">
+            <!-- default_group_by="room_categ_id" -->
+                <separator/>
+                <filter string="Product Category" name="categ_id" context="{'group_by':'categ_id'}"/>
+                <filter string="Tipe Hotel " name="type_hotel" context="{'group_by':'type_hotel'}"/>
+                <filter name="filter_rooms" string="Rooms" domain="[('pos_categ_id', '=', 9)]" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Add Inherite Product Catalog sub menus -->
+    <menuitem id="pos_config_menu_action_product_product" name="Rooms" parent="point_of_sale.pos_config_menu_catalog" action="product_product_action" sequence="15"/>
 
 </odoo>

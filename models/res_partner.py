@@ -44,3 +44,15 @@ class PosPayment(models.Model):
 
     room_id = fields.Many2one('room.room', string='Room')
 
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
+    
+    type_hotel = fields.Selection(
+        string='Type Hotel',
+        selection=[
+            ('standard', 'Standard Room'),
+            ('superior', 'Superior Room'),
+            ('deluxe', 'Deluxe Room')
+        ]
+    )
+     
