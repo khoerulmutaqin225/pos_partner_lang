@@ -4,8 +4,125 @@
 <templates id="template" xml:space="preserve">
 
     <t t-name="FavoriteProductScreen">
-        <div>
-               This Is Product Screen
+        <div class="favorite-product-screen screen">
+            <div class="screen-header">
+                <div>
+                    <h1>
+                    This Is Favorite Product Screen
+                    </h1>
+                    <p>Date : </p>
+                    <p>Popup Message    :</p>
+                </div>
+                <div class="large-buttons">
+                
+                    <!-- <span class='button a'>
+                       <i class='fa fa-angle-double-left'></i>
+                        Test A
+                    </span>
+
+                    <span class='button b'>
+                       <i class='fa fa-angle-double-left'></i>
+                        Test B
+                    </span> -->
+                
+                    <button class="back">Go Back</button>
+                    
+                    <button class="red"> Mark as <br/>
+                         Favorite</button>
+                    <button class="orange">Mark as <br/>
+                         Not Favorite</button>
+                    <button class="blue">Toggle Favorite </button>
+                </div>
+            </div>
+
+            <div class="favorite-content">
+                <div class="left-pane">
+                    <table class="favorite-list">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                            </tr>
+                        </thead>
+                        <tbody class="favorite-list-body">
+                            <tr>
+                                <td>[000] Favorite Product </td>
+                            </tr>
+                            <tr>
+                                <td>[001] Favorite Product 1</td>
+                            </tr>
+                            <tr>
+                                <td>[002] Favorite Product 2</td>
+                            </tr>
+                            <tr>
+                                <td>[003] Favorite Product 3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- Left Panel -->
+                </div>
+                <div class="right-pane">
+                    <div class="selected-product">
+                        <h1>Product Detail</h1>
+                        <p>
+                            Name : <br/>
+                            Code : <br/>
+                            Price : <br/>
+                        </p>
+                    </div>
+                    <div class="control-buttons">
+                            Control Buttons 
+                    </div>
+                    <div class="pads">
+
+                        <!-- <div class="subpads"> -->
+                            <!-- <t t-set="actionpad" >Custom Action</t> -->
+                        <!-- </div> -->
+
+                        <div class="actionpad">
+                                <button t-attf-class='button set-customer #{ ( widget.pos.get_client() and widget.pos.get_client().name.length > 10) ? "decentered" : "" }' >
+                                    <i class='fa fa-user' role="img" aria-label="Customer" title="Customer"/>
+                                    <t t-if="widget.pos.get_client()">
+                                        <t t-esc="widget.pos.get_client().name" />
+                                    </t>
+                                    <t t-if="!widget.pos.get_client()">
+                                        Customer
+                                    </t>
+                                </button>
+                                <button class='button pay'>
+                                    <div class='pay-circle'>
+                                        <i class='fa fa-chevron-right' role="img" aria-label="Pay" title="Pay"/>
+                                    </div>
+                                    Payment
+                                </button>                              
+
+                                <div class="numpad">
+                                    <button class="input-button number-char">1</button>
+                                    <button class="input-button number-char">2</button>
+                                    <button class="input-button number-char">3</button>
+                                    <button class="mode-button" data-mode='quantity'>Qty</button>
+                                    <br />
+                                    <button class="input-button number-char">4</button>
+                                    <button class="input-button number-char">5</button>
+                                    <button class="input-button number-char">6</button>
+                                    <button class="mode-button" data-mode='discount'>Disc</button>
+                                    <br />
+                                    <button class="input-button number-char">7</button>
+                                    <button class="input-button number-char">8</button>
+                                    <button class="input-button number-char">9</button>
+                                    <button class="mode-button" data-mode='price'>Price</button>
+                                    <br />
+                                    <button class="input-button numpad-minus" >+/-</button>
+                                    <button class="input-button number-char">0</button>
+                                    <button class="input-button number-char">.</button>
+                                    <button class="input-button numpad-backspace">
+                                        <img style="pointer-events: none;" src="/point_of_sale/static/src/img/backspace.png" width="24" height="21" alt="Backspace"/>
+                                    </button>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </t>
 </templates>
